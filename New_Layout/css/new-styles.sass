@@ -3,6 +3,10 @@
   @media (max-width: 1024px)
     @content
 
+@mixin sm
+  @media (max-width: 720px)
+    @content
+
 @mixin flex-row
   display: flex
   flex-direction: row
@@ -21,6 +25,8 @@
   padding: 10px 40px
   @include md
     @include flex-col
+  @include sm
+    padding: 10px
 .col-md-6
   width: calc((100%/12)*6)
   @include md
@@ -60,6 +66,8 @@ $txtcolLT: lighten($txtcol, 45%)
 .btn
   display: inline-block
   padding: 8px 15px
+  @include sm
+    padding: 6px 10px
   border-radius: 5px
   text-transform: uppercase
   color: #666 !important
@@ -158,6 +166,22 @@ label
     .arrow-single.next
       &::before
         content: '>'
+// TABLE
+.table
+  overflow-x: auto
+  width: 100%
+  min-height: 600px
+  table
+    width: 100%
+    min-width: 1400px
+    thead
+      background: $bgcol
+      tr
+        input
+          height: 25px
+          margin: 5px
+          border: none
+          border-radius: 5px
 
 // GENERAL
 a,a:visited,a:active
@@ -179,11 +203,13 @@ body
   background: $bgcol
 .content
 
-.table
-  width: 100%
-  height: 400px
-  background: white
+
 h1
   text-transform: uppercase
   font-size: 22px
+  color: lighten($txtcol, 20%)
+h3
+  text-transform: uppercase
+  font-size: 18px
+  font-weight: lighter
   color: lighten($txtcol, 20%)
