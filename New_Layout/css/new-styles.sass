@@ -1,0 +1,189 @@
+// MIXINS
+@mixin md
+  @media (max-width: 1024px)
+    @content
+
+@mixin flex-row
+  display: flex
+  flex-direction: row
+  align-items: center
+
+@mixin flex-col
+  display: flex
+  flex-direction: column
+
+@mixin transition
+  transition: all .4s ease-in-out
+
+// LAYOUT
+.row
+  @include flex-row
+  padding: 10px 40px
+  @include md
+    @include flex-col
+.col-md-6
+  width: calc((100%/12)*6)
+  @include md
+    width: 100%
+.col-md-8
+  width: calc((100%/12)*8)
+  @include md
+    width: 100%
+.col-md-4
+  width: calc((100%/12)*4)
+  @include md
+    width: 100%
+
+.right
+  float: right
+// COLOURS
+
+$bgcol: #eee
+$bgcolDK: darken($bgcol, 10%)
+
+$txtcol: #444
+$txtcolLT: lighten($txtcol, 45%)
+
+.default
+  background: $bgcolDK
+  @include transition
+  &:hover
+    background: darken($bgcolDK, 5%)
+
+.yellowBG
+  background: #F0DB04
+  @include transition
+  &:hover
+    background: darken(#F0DB04, 5%)
+
+// BUTTONS
+.btn
+  display: inline-block
+  padding: 8px 15px
+  border-radius: 5px
+  text-transform: uppercase
+  color: #666 !important
+  font-weight: bold
+  @include flex-row
+
+// SELECT
+select
+  padding: 10px 15px
+  border-radius: 5px 0 0 5px
+  border: none
+  font-size: 19px
+  text-align: center
+  @include md
+    margin: 10px 0
+label
+  color: $txtcol
+// BURGER
+.burger
+  width: 20px
+  height: 2px
+  background: $txtcol
+  margin-left: 10px
+  position: relative
+  &::before,
+  &::after
+    position: absolute
+    width: 100%
+    height: 100%
+    left: 0
+    background: #444
+    content: ''
+    @include transition
+  &::before
+    top: -7px
+  &::after
+    top: 7px
+
+.btn
+  &:hover
+    .burger::before
+      transform: translateY(-2px)
+    .burger::after
+      transform: translateY(2px)
+
+// BREADCRUMBS
+.breadcrumb-path
+  @include flex-row
+  width: 100%
+  padding: 10px 0
+  border-top: 2px solid $txtcolLT
+  border-bottom: 2px solid $txtcolLT
+  li
+    padding: 8px 15px
+    padding-right: 25px
+    padding-left: 8px
+    background: lighten($bgcol, 2%)
+    color: $txtcol
+    font-weight: bold
+    position: relative
+    cursor: pointer
+    @include transition
+    &::before
+      position: absolute
+      right: 2px
+      width: 10px
+      height: 100%
+      font-weight: lighter
+      content: '>'
+    &:first-child
+      border-radius: 5px 0 0 5px
+      padding-left: 15px
+    &:last-child
+      border-radius: 0 5px 5px 0
+      padding-right: 15px
+      &::before
+        display: none
+    &:hover
+      background: lighten($bgcol, 7%)
+
+// PAGINATION
+.pagination
+  .pagination-buttons
+    @include flex-row
+    .btn
+      margin: 2px
+    .arrow-double.first
+      &::before
+        content: '<<'
+    .arrow-double.last
+      &::before
+        content: '>>'
+    .arrow-single.prev
+      &::before
+        content: '<'
+    .arrow-single.next
+      &::before
+        content: '>'
+
+// GENERAL
+a,a:visited,a:active
+  text-decoration: none
+  color: inherit
+
+ul,li
+  list-style: none
+
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+body
+  font-family: sans-serif
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  line-height: 1.6
+  background: $bgcol
+.content
+
+.table
+  width: 100%
+  height: 400px
+  background: white
+h1
+  text-transform: uppercase
+  font-size: 22px
+  color: lighten($txtcol, 20%)
